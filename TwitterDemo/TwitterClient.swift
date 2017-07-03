@@ -41,8 +41,10 @@ class TwitterClient: BDBOAuth1SessionManager {
         fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) in
             print("I got access Token!")
             self.currentAccount(success: { (user: User) in
-               User.currentUser = user
+               //               // print(user)
                 self.loginSuccess?()
+                //User.currentUser = user
+
             }, failure: { (error: NSError) in
                 self.loginFailure?(error)
             })
@@ -75,5 +77,58 @@ class TwitterClient: BDBOAuth1SessionManager {
             failure(error)
         } as? (URLSessionDataTask?, Error) -> Void)
     }
+    func updateStatus(status: String, completion: @escaping (_ response: Any?, _ error: NSError?) -> () ) {
+        var params = [String : String]()
+        params["status"] = status
+        post("1.1/statuses/update.json", parameters: params, progress: nil, success: { (task: URLSessionDataTask, response: Any ) in
+            print("update status success!")
+            completion(response, nil)
+        }, failure: { (task: URLSessionDataTask?, error) in
+            completion(nil, error as NSError?)
+            print("update status fail!")
+        })
 }
-
+    func likeStatus(tweetId: String, Like: Bool, completion: @escaping (_ response: Any?, _ error: NSError?) -> ()) {
+        var params = [String : String]()
+        params["id"] = tweetId
+        
+        if Like {
+            post("1.1/favorites/create.json", parameters: params, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+                completion(response, nil)
+                print("Like!")
+                
+            }) { (operation: URLSessionDataTask?, error: Error) in
+                print("Like error!")
+            }
+        }else {
+            post("1.1/favorites/destroy.json", parameters: params, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+                completion(response, nil)
+                print("Unlike !")
+            }, failure: { (task: URLSessionDataTask?, error: Error) in
+                print("Unlike error!")
+            })
+        }
+        
+    }
+    func retweetStatus(tweetId: String, isRetweet: Bool, completion: @escaping (_ response: Any?, _ error: NSError?) -> ()) {
+        var params = [String : String]()
+        params["id"] = tweetId
+        
+        if isRetweet {
+            post("1.1/statuses/retweet/\(tweetId).json", parameters: params, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+                completion(response, nil)
+                print("Retweeded!")
+                
+            }) { (operation: URLSessionDataTask?, error: Error) in
+                print("Retweeded error")
+            }
+        }else {
+            post("1.1/statuses/unretweet/\(tweetId).json", parameters: params, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+                completion(response, nil)
+                print("Detroy Unretweed!")
+            }, failure: { (task: URLSessionDataTask?, error: Error) in
+                print("Detroy Unretweed error")
+            })
+        }
+    }
+}

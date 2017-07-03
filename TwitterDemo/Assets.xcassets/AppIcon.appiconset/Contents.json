@@ -1,21 +1,9 @@
 {
   "images" : [
     {
-      "size" : "20x20",
-      "idiom" : "iphone",
-      "filename" : "twitterlogo20.png",
-      "scale" : "2x"
-    },
-    {
       "idiom" : "iphone",
       "size" : "20x20",
       "scale" : "2x"
-    },
-    {
-      "size" : "20x20",
-      "idiom" : "iphone",
-      "filename" : "twitterlogo20@3x.png",
-      "scale" : "3x"
     },
     {
       "idiom" : "iphone",
@@ -29,58 +17,41 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "Twitter_Social_Icon_Rounded_Square_Color.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "twitterlogo20@3x.png",
       "scale" : "2x"
     },
     {
-      "size" : "29x29",
+      "size" : "40x40",
       "idiom" : "iphone",
       "filename" : "twitterlogo29@3x.png",
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
-      "size" : "29x29",
-      "scale" : "3x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "twitterlogo40.png",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "40x40",
-      "scale" : "2x"
-    },
-    {
-      "size" : "40x40",
+      "size" : "60x60",
       "idiom" : "iphone",
       "filename" : "twitterlogo40@3x.png",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "40x40",
-      "scale" : "3x"
-    },
-    {
-      "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "Twitter_Social_Icon_Rounded_Square_Color.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "60x60",
-      "scale" : "2x"
+      "idiom" : "iphone",
+      "filename" : "twitterlogo40.png",
+      "scale" : "3x"
     },
     {
+      "size" : "20x20",
       "idiom" : "iphone",
-      "size" : "60x60",
-      "scale" : "3x"
+      "filename" : "twitterlogo20.png",
+      "unassigned" : true,
+      "scale" : "2x"
     }
   ],
   "info" : {

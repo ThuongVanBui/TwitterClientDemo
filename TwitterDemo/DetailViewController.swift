@@ -7,7 +7,10 @@
 //
 
 import UIKit
-
+protocol TweetDetailViewControllerDelegate {
+    func onRetweetTweetDetail ()
+    func onFavoriteTweetDetail ()
+}
 class DetailViewController: UIViewController {
     
     @IBOutlet weak var profileImage: UIImageView!
@@ -30,15 +33,15 @@ class DetailViewController: UIViewController {
     var tweetId = ""
     var delegate: TweetCellDelegate!
     
-    var tweetItem: Tweet!
+    var tweetItem: Tweet?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        retweetActionImage.setImage(UIImage(named: "retweet_off"), for: .normal)
-//        retweetActionImage.setImage(UIImage(named: "retweet_on"), for: .selected)
-//        favoriteActionImage.setImage(UIImage(named:"like_off"), for: .selected)
-//        favoriteActionImage.setImage(UIImage(named:"like_on"), for: .normal)
+        retweetActionImage.setImage(UIImage(named: "retweet_off"), for: .normal)
+        retweetActionImage.setImage(UIImage(named: "retweet_on"), for: .selected)
+        favoriteActionImage.setImage(UIImage(named:"like_on"), for: .selected)
+        favoriteActionImage.setImage(UIImage(named:"like_off"), for: .normal)
         favoriteCountLabel.text = tweetItem?.favoriteCount.description
         retweetCountLabel.text = tweetItem?.retweetCount.description
         tweetTextLabel.text = tweetItem?.text as String?
@@ -49,9 +52,14 @@ class DetailViewController: UIViewController {
         if let retweet = tweetItem!.retweetBy {
             retweetLabel.text = "\(retweet) Retweeted"
             retweetImage.image = UIImage(named: "retweet_on")
-               }
+            
+        }
+        else{
+            retweetLabel.text = ""
+            retweetImage.image = UIImage(named: "retweet_off")
+        }
         
-        let data = try! Data(contentsOf: tweetItem?.user?.profileImageUrl as! URL)
+        let data = try! Data(contentsOf: (tweetItem?.user?.profileImageUrl as! NSURL) as! URL)
         profileImage.image = UIImage(data: data)
         
         if (tweetItem?.isFavorited)! {
@@ -81,5 +89,38 @@ class DetailViewController: UIViewController {
 
     }
    
+    @IBAction func onRetweet(_ sender: UIButton) {
+        if retweetActionImage.isSelected {
+        retweetActionImage.isSelected = false
+        retweetCountLabel.text = "\((tweetItem?.retweetCount)! - 1)"
+        tweetItem?.retweetCount -= 1
+    }else {
+        retweetActionImage.isSelected = true
+        retweetCountLabel.text = "\((tweetItem?.retweetCount)! + 1)"
+        tweetItem?.retweetCount += 1
+        }
+        TwitterClient.sharedInstance?.retweetStatus(tweetId: tweetId, isRetweet: retweetActionImage.isSelected, completion: { (response, error) in
+            
+            self.delegate.onRetweet()
+            
+        })
+    }
+    @IBAction func onFavorite(_ sender: UIButton) {
+        if favoriteActionImage.isSelected {
+            favoriteActionImage.isSelected = false
+            favoriteCountLabel.text = "\((tweetItem?.favoriteCount)! - 1)"
+            tweetItem?.favoriteCount -= 1
+        } else {
+            favoriteActionImage.isSelected = true
+            favoriteCountLabel.text = "\((tweetItem?.favoriteCount)! + 1)"
+            tweetItem?.favoriteCount += 1
+        }
+        
+        TwitterClient.sharedInstance?.likeStatus(tweetId: tweetId, Like: favoriteActionImage.isSelected, completion: { (response, error) in
+            
+            self.delegate.onLike()
+            
+        })
+    }
 
 }

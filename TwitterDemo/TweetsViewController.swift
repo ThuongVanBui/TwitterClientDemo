@@ -10,7 +10,7 @@ import UIKit
 import BDBOAuth1Manager
 import AFNetworking
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,TweetCellDelegate,TweetDetailViewControllerDelegate {
     var tweets = [Tweet]()
     let refreshControl = UIRefreshControl()
     @IBOutlet weak var tableView: UITableView!
@@ -66,7 +66,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetsCell", for: indexPath) as! TweetsCell
         cell.tweetItem = tweets[indexPath.row]
-      //  cell.delegate = self
+        cell.delegate = self
         return cell
         
     }
@@ -85,5 +85,24 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   
         }
     }
+    func didFinishUpdate() {
+        refreshControlAction(refreshControl)
+    }
+    
+    func onRetweet() {
+        loadData()
+    }
+    
+    func onLike() {
+        loadData()
+    }
+    
+    func onRetweetTweetDetail() {
+        loadData()
+    }
+    func onFavoriteTweetDetail() {
+        loadData()
+    }
+    
 
 }

@@ -54,8 +54,9 @@ class User: NSObject {
                 defaults.set(nil, forKey: "currentUserData")
             }
             user?.dictionnary
-            defaults.set(user, forKey: "_currentUser")
+            defaults.set(user, forKey: "currentUser")
             defaults.synchronize()
+            print(currentUser)
                     }
     }
     

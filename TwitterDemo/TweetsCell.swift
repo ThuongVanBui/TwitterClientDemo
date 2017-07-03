@@ -8,8 +8,8 @@
 
 import UIKit
 protocol TweetCellDelegate {
-    func onRetweet ()
-    func onFavorite ()
+    func onRetweet()
+    func onLike()
 }
 class TweetsCell: UITableViewCell {
 
@@ -48,6 +48,11 @@ class TweetsCell: UITableViewCell {
                 retweetImage.image = UIImage(named: "retweet_on")
             
             }
+            else{
+                retweetLabel.text = ""
+                retweetImage.image = UIImage(named: "retweet_off")
+            }
+
             
             let data = try! Data(contentsOf: (tweetItem?.user?.profileImageUrl! as! NSURL) as URL)
             profileImage.image = UIImage(data: data)
@@ -70,13 +75,43 @@ class TweetsCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        retweetActionImage.setImage(UIImage(named: "retweet_off"), for: .normal)
+        retweetActionImage.setImage(UIImage(named: "retweet_on"), for: .selected)
+        favoriteActionImage.setImage(UIImage(named:"like_on"), for: .selected)
+        favoriteActionImage.setImage(UIImage(named:"like_off"), for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func onRetweet(_ sender: UIButton) {
+        if retweetActionImage.isSelected {
+            retweetActionImage.isSelected = false
+        }else {
+            retweetActionImage.isSelected = true
+        }
+        TwitterClient.sharedInstance?.retweetStatus(tweetId: tweetId, isRetweet: retweetActionImage.isSelected, completion: { (response, error) in
+            
+            self.delegate.onLike()
+            
+        })
+
+    }
+    @IBAction func onLike(_ sender: UIButton) {
+        if favoriteActionImage.isSelected {
+            favoriteActionImage.isSelected = false
+        } else {
+            favoriteActionImage.isSelected = true
+        }
+        
+        TwitterClient.sharedInstance?.likeStatus(tweetId: tweetId, Like: favoriteActionImage.isSelected, completion: { (response, error) in
+            
+            self.delegate.onLike()
+            
+        })
+
     }
 
 }
