@@ -8,6 +8,8 @@
 
 import UIKit
 import BDBOAuth1Manager
+import Foundation
+
 class TwitterClient: BDBOAuth1SessionManager {
     static let sharedInstance = TwitterClient(baseURL:NSURL(string:"https://api.twitter.com/")! as URL!, consumerKey: "O2xgw3OdWH2VJLGE39ozM1Cjw", consumerSecret: "YvqT3rq5v8TFngNihIcjikzs8y33sOfsurYSwV4YDVSRQGhGU2")
     var loginSuccess: (() -> ())?
@@ -29,12 +31,17 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
 
     }
+    func Logout() {
+        User.currentUser = nil
+        deauthorize()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
+    }
     func handleOpenUrl(url: NSURL){
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) in
             print("I got access Token!")
             self.currentAccount(success: { (user: User) in
-                User.currentUser = user
+               User.currentUser = user
                 self.loginSuccess?()
             }, failure: { (error: NSError) in
                 self.loginFailure?(error)

@@ -18,13 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser != nil{
             print("There is a current user")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "tweetsViewController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "TwitterNavigationController")
             window?.rootViewController = vc
-        }else
-        {
-            print("There is no current user")
-        }
-        // Override point for customization after application launch.
+             }
+        else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
+        window?.rootViewController = vc
+    }
+    
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil, queue: OperationQueue.main) { (Notification) in
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyboard.instantiateInitialViewController()
+    self.window?.rootViewController = vc
+    }
         return true
     }
 
