@@ -35,8 +35,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         }, failure: { (error: NSError) in
             print(error.localizedDescription)
         })
-        
-        
 }
     
     @IBAction func onLogout(_ sender: UIBarButtonItem) {
@@ -81,7 +79,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             
             
             destVC.tweetItem = tweet
-           // destVC.delegate = self
+            destVC.delegate = self
   
         }
     }

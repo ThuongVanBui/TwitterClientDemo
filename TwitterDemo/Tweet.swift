@@ -21,6 +21,7 @@ class Tweet: NSObject {
     var isRetweeted = false
     var isFavorited = false
     var retweet: Tweet?
+    var timeSinceCreated: String?
 
     
     init(dictionary: NSDictionary) {
@@ -53,9 +54,18 @@ class Tweet: NSObject {
             let sinceDate = formatter.date(from: timestampString)
             formatter.dateFormat = "dd/MM/yyyy hh:mm"
             createdAt = formatter.string(from: sinceDate!)
+            let elapsedTime = Date().timeIntervalSince(sinceDate!)
+            if elapsedTime < 60 {
+                timeSinceCreated = String(Int(elapsedTime)) + " s ago"
+            } else if elapsedTime < 3600 {
+                timeSinceCreated = String(Int(elapsedTime / 60)) + " mins ago"
+            } else if elapsedTime < 24*3600 {
+                timeSinceCreated = String(Int(elapsedTime / 60 / 60)) + " hr ago"
+            } else {
+                timeSinceCreated = String(Int(elapsedTime / 60 / 60 / 24)) + " day ago"
+            }
+            
         }
-
-
     }
     
     class func tweetsWithArray(dictionaries: [NSDictionary]) -> [Tweet] {

@@ -22,10 +22,13 @@ class NewstateViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         newTweetTextField.delegate = self
-        
-        profileLabel.text = tweetItem?.user?.name
-        usernameLabel.text = "@\(tweetItem?.user?.screenName)"
-    //    let data = try! Data(contentsOf: (tweetItem?.user?.profileImageUrl as! NSURL) as! URL)
+        let user = User.currentUser
+        if user != nil{
+            profileImage.setImageWith((user?.profileImageUrl)!)
+            profileLabel.text = user?.name
+            usernameLabel.text = "@\(user?.screenName)"
+        }
+           //    let data = try! Data(contentsOf: (tweetItem?.user?.profileImageUrl as! NSURL) as! URL)
         //profileImage.image = UIImage(data: data)
         // Do any additional setup after loading the view.
     }

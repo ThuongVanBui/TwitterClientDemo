@@ -27,7 +27,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             UIApplication.shared.openURL(url! as URL)
         }, failure: { (error: Error!) in
             print("error:\(error.localizedDescription)")
-            self.loginFailure?(error as! NSError)
+            self.loginFailure?(error! as NSError)
         })
 
     }
@@ -43,21 +43,20 @@ class TwitterClient: BDBOAuth1SessionManager {
             self.currentAccount(success: { (user: User) in
                //               // print(user)
                 self.loginSuccess?()
-                //User.currentUser = user
-
+                User.currentUser = user
             }, failure: { (error: NSError) in
                 self.loginFailure?(error)
             })
             
         }, failure: { (error: Error?) in
-            print("error: \(error?.localizedDescription)")
-            self.loginFailure?(error as! NSError)
+            print("error: \(String(describing: error?.localizedDescription))")
+            self.loginFailure?(error! as NSError)
         })
 
     }
     func currentAccount(success: @escaping (User) -> (),failure: @escaping (NSError) -> ()){
         get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            print("account: \(response)")
+            print("account: \(String(describing: response))")
             let userDictionnary = response as! NSDictionary
             let user = User(dictionnary: userDictionnary)
            success(user)

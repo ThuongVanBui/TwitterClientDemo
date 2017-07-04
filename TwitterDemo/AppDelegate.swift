@@ -15,18 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0.01911348291, green: 0.6245462894, blue: 0.9610264897, alpha: 1)
+        UINavigationBar.appearance().tintColor = UIColor.white
         if User.currentUser != nil{
             print("There is a current user")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "TwitterNavigationController")
-            window?.rootViewController = vc
+            self.window?.rootViewController = vc
              }
-        else{
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-        window?.rootViewController = vc
-    }
-    
+            
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil, queue: OperationQueue.main) { (Notification) in
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let vc = storyboard.instantiateInitialViewController()

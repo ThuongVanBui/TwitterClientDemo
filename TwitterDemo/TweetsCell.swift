@@ -68,7 +68,7 @@ class TweetsCell: UITableViewCell {
             }else {
                 retweetActionImage.isSelected = false
             }
-            timeLabel.text = tweetItem?.createdAt
+            timeLabel.text = tweetItem?.timeSinceCreated
         }
         
     }
@@ -97,7 +97,8 @@ class TweetsCell: UITableViewCell {
             self.delegate.onLike()
             
         })
-
+        
+       
     }
     @IBAction func onLike(_ sender: UIButton) {
         if favoriteActionImage.isSelected {

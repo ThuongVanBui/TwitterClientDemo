@@ -73,7 +73,7 @@ class DetailViewController: UIViewController {
         }else {
             retweetActionImage.isSelected = false
         }
-        timeLabel.text = tweetItem?.createdAt
+        timeLabel.text = tweetItem?.timeSinceCreated
 
         // Do any additional setup after loading the view.
     }

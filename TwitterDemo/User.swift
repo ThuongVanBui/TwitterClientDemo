@@ -46,7 +46,7 @@ class User: NSObject {
              let defaults = UserDefaults.standard
             if let user = user
             {
-                let data: Data =  NSKeyedArchiver.archivedData(withRootObject: user.dictionnary)
+                let data: Data =  NSKeyedArchiver.archivedData(withRootObject: user.dictionnary!) as Data
                 defaults.set(data, forKey: "currentUserData")
 
             }
@@ -56,7 +56,7 @@ class User: NSObject {
             user?.dictionnary
             defaults.set(user, forKey: "currentUser")
             defaults.synchronize()
-            print(currentUser)
+           // print(currentUser!)
                     }
     }
     

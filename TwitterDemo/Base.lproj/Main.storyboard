@@ -67,12 +67,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="456" y="194"/>
+            <point key="canvasLocation" x="193" y="199"/>
         </scene>
         <!--Home-->
         <scene sceneID="RRk-B3-RfL">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y7R-Bo-aij" customClass="TweetsViewController" customModule="TwitterDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="twitterNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y7R-Bo-aij" customClass="TweetsViewController" customModule="TwitterDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Ce-k7-dtY"/>
                         <viewControllerLayoutGuide type="bottom" id="G8v-Qm-fcW"/>
@@ -89,7 +89,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="231"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nMv-Qq-VSg" id="GYD-zq-eXd">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="231"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="230.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRR-xW-Zzl">
@@ -113,7 +113,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.81406716189999995" green="0.88136299399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="F9v-FA-0Sb"/>
                                                         <constraint firstAttribute="bottom" secondItem="SqP-km-6ie" secondAttribute="bottom" id="Krv-80-nWr"/>
@@ -238,6 +238,7 @@
                                                 <constraint firstItem="IlF-pg-V3X" firstAttribute="top" secondItem="HRR-xW-Zzl" secondAttribute="bottom" constant="5" id="wVX-kv-2gM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.81406716187216532" green="0.88136299404512253" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="favoriteActionImage" destination="TvF-FU-H28" id="Yv2-vx-ADT"/>
                                             <outlet property="favoriteCountLabel" destination="Y0a-GF-uMC" id="dQc-30-AbJ"/>
@@ -316,7 +317,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.81406716189999995" green="0.88136299399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="LXg-ag-hMK" secondAttribute="trailing" id="6Ed-Qt-8lY"/>
                                     <constraint firstItem="LXg-ag-hMK" firstAttribute="leading" secondItem="7By-np-kmh" secondAttribute="trailing" constant="5" id="Dbq-pz-cTO"/>
@@ -408,7 +409,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.81406716189999995" green="0.88136299399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="sdB-8D-ZBr" firstAttribute="leading" secondItem="15M-XI-DXs" secondAttribute="leading" id="1Ds-h8-szF"/>
                             <constraint firstItem="QDe-Fn-geq" firstAttribute="top" secondItem="478-CY-HZY" secondAttribute="bottom" constant="5" id="5kM-jv-mXr"/>
@@ -533,7 +534,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.77924982083026562" green="0.92907815824417894" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.81406716189999995" green="0.88136299399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="nzd-fK-RqJ" firstAttribute="top" secondItem="yGk-ss-IG0" secondAttribute="bottom" constant="30" id="3Wd-V7-VYt"/>
@@ -599,7 +600,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QGt-N1-3aY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1190.625" y="198.59154929577466"/>
+            <point key="canvasLocation" x="966" y="199"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RNu-qS-kSK">
